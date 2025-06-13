@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace NorthWind.Modelos
+namespace NorthWind.Modelos.Dtos
 {
-    public class Cliente
+    public class ClienteDto
     {
-        [Key] 
         public int CustomerId { get; set; }
         public string CompanyName { get; set; }
         public string ContactName { get; set; }

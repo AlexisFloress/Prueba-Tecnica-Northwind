@@ -1,4 +1,5 @@
-﻿using NorthWind.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using NorthWind.Data;
 using NorthWind.Modelos;
 using NorthWind.Repositorio.IRepositorio;
 
@@ -13,25 +14,20 @@ namespace NorthWind.Repositorio
             _db = db;
         }
 
-        public ICollection<Cliente> GetClientes()
+        public async Task<ICollection<Cliente>> GetClientes()
         {
-            return _db.Cliente.OrderBy(x => x.ContactName).ToList(); 
+            return await _db.Cliente.OrderBy(x => x.ContactName).ToListAsync(); 
         }
 
-        public ICollection<Cliente> GetClientesPorPais(string pais)
+        public async Task<ICollection<Cliente>> GetClientesPorPais(string pais)
         {
-            return _db.Cliente.Where(x => x.Pais.ToLower() == pais.ToLower()).OrderBy(x => x.ContactName).ToList();
+            return await _db.Cliente.Where(x => x.Pais.ToLower() == pais.ToLower()).OrderBy(x => x.ContactName).ToListAsync();
         }
 
-        public ICollection<Orden> GetOrdenes()
-        {
-            return _db.Orden.OrderBy(x => x.ShippedDate).ToList();
 
-        }
-
-        public ICollection<Orden> GetOredenesPorClienteId(int id)
+        public async Task<ICollection<Orden>> GetOredenesPorClienteId(int id)
         {
-            return _db.Orden.Where(x => x.CustomerId == id).OrderBy(x => x.ShippedDate).ToList();
+            return await _db.Orden.Where(x => x.CustomerId == id).OrderBy(x => x.ShippedDate).ToListAsync();
         }
     }
 }

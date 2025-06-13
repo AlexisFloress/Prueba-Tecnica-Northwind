@@ -23,9 +23,9 @@ namespace NorthWind.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult GetClientes()
+        public async Task<IActionResult> GetClientes()
         {
-            var listaClientes = _clienteRepo.GetClientes();
+            var listaClientes = await _clienteRepo.GetClientes();
             var listaClientesDto = new List<ClienteDto>();
 
             foreach (var lista in listaClientes)
@@ -41,9 +41,9 @@ namespace NorthWind.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetClientes(string Country)
+        public async Task<IActionResult> GetClientes(string Country)
         {
-            var clientes = _clienteRepo.GetClientesPorPais(Country);
+            var clientes = await _clienteRepo.GetClientesPorPais(Country);
 
             if (clientes == null || !clientes.Any())
             {
@@ -61,9 +61,9 @@ namespace NorthWind.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetOrdenes(int CostomerId)
+        public async Task<IActionResult> GetOrdenes(int CostomerId)
         {
-            var Ordenes = _clienteRepo.GetOredenesPorClienteId(CostomerId);
+            var Ordenes = await _clienteRepo.GetOredenesPorClienteId(CostomerId);
 
             if (Ordenes == null || !Ordenes.Any())
             {

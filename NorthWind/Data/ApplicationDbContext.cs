@@ -10,7 +10,8 @@ namespace NorthWind.Data
             
         }
 
-        //Agregar todas las entidades
+        //Agregar todas los modelos
+        //Aqui se hace la relacion de los modelos con la base de datos
         public DbSet<Cliente> Cliente { get; set; }
         public DbSet<Orden> Orden { get; set; }
 

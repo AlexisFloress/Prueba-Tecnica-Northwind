@@ -11,7 +11,7 @@ namespace NorthWind.Modelos
         public DateTime ShippedDate { get; set; }
 
         //Foreing Key
-
+        //Se configura la llave foranea
         public int CustomerId { get; set; }
         [ForeignKey("CustomerId")]
         public Cliente Cliente { get; set; }

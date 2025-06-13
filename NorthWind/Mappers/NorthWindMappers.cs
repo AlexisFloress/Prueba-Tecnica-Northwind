@@ -11,6 +11,7 @@ namespace NorthWind.Mappers
         public NorthWindMappers()
         {
             CreateMap<Cliente, ClienteDto>().ReverseMap();
+            CreateMap<Orden,  OrdenDto>().ReverseMap();
         }
     }
 }

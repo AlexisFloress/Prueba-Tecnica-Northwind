@@ -12,6 +12,7 @@ namespace NorthWind.Data
 
         //Agregar todas las entidades
         public DbSet<Cliente> Cliente { get; set; }
+        public DbSet<Orden> Orden { get; set; }
 
     }
 }

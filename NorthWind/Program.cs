@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using NorthWind.Data;
 using NorthWind.Mappers;
+using NorthWind.MiddleWare;
 using NorthWind.Repositorio;
 using NorthWind.Repositorio.IRepositorio;
 
@@ -15,6 +16,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(opciones =>
 
 //Repositorio
 builder.Services.AddScoped<IClienteRepositorio, ClienteRepositorio>();
+builder.Services.AddScoped<IWebTrackerRepositorio, WebTrackerRepositorio>();
 //Agregamos el autoMapper
 builder.Services.AddAutoMapper(typeof(NorthWindMappers));
 
@@ -23,10 +25,7 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
-        policy
-            .AllowAnyOrigin()    // Permite cualquier origen (en desarrollo)
-            .AllowAnyHeader()
-            .AllowAnyMethod();
+        policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();    // Permite cualquier origen (en desarrollo)
     });
 });
 
@@ -47,9 +46,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseCors();
 app.UseAuthorization();
+app.UseRouting();
+app.UseMiddleware<RequestTrackingMiddleware>();
 
 app.MapControllers();
 

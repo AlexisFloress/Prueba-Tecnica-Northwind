@@ -12,21 +12,20 @@ namespace NorthWind.MiddleWare
             _next = next;
         }
 
-        public async Task InvokeAsync(HttpContext context, IWebTrackerRepositorio trackingRepository)
+        public async Task InvokeAsync(HttpContext context, IWebTrackerRepositorio trackingRepositorio)
         {
             // Capturar datos antes de procesar la solicitud
-            var tracker = new WebTracker
+            WebTracker tracker = new WebTracker
             {
                 UrlRequest = context.Request.Path,
                 SourceIp = context.Connection.RemoteIpAddress?.ToString() ?? "Desconocido",
-                TimeOfAction = DateTime.UtcNow
+                TimeOfAction = DateTime.Now
             };
 
-            // Procesar la solicitud
             await _next(context);
 
             // Guardar asíncronamente después de completar la respuesta
-            await trackingRepository.TrackRequestAsync(tracker);
+            await trackingRepositorio.TrackRequestAsync(tracker);
         }
     }
 }

@@ -18,6 +18,18 @@ builder.Services.AddScoped<IClienteRepositorio, ClienteRepositorio>();
 //Agregamos el autoMapper
 builder.Services.AddAutoMapper(typeof(NorthWindMappers));
 
+// Habilita CORS
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy
+            .AllowAnyOrigin()    // Permite cualquier origen (en desarrollo)
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 
 
 builder.Services.AddControllers();
@@ -36,6 +48,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors();
 app.UseAuthorization();
 
 app.MapControllers();

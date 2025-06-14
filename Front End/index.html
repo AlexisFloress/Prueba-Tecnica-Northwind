@@ -71,12 +71,16 @@
   </table>
 
   <script>
-    // Cargar todos los clientes al iniciar
+    
     document.addEventListener('DOMContentLoaded', loadCustomers);
 
     async function loadCustomers() {
+      //Consumiendo el endPoint de Cliente Listanto todos los endpoints
+
       try {
+        //Editar endpoint correspondiente al  /api/Customers
         const response = await fetch('https://localhost:7060/api/Customers');
+        //-----------------------------------------------------------------
         const data = await response.json();
         renderCustomerTable(data);
       } catch (error) {
@@ -90,9 +94,11 @@
         alert('Por favor, ingresa un país.');
         return;
       }
-
+        //Consumiendo el endPoint de Cliente Filtrado por Pais
       try {
-        const response = await fetch(`/api/customers/${encodeURIComponent(country)}`);
+        //Editar endpoint correspondiente al  /api/Customers/{country}
+        const response = await fetch(`https://localhost:7060/api/Customers/${encodeURIComponent(country)}`);
+        //-----------------------------------------------------------------
         const data = await response.json();
         console.log('Datos obtenidos:', data);
         renderCustomerTable(data);
@@ -130,9 +136,11 @@
         alert('Por favor, ingresa el codigo del cliente.');
         return;
       }
-
+        //Consumiendo el endPoint de Order Filtrado por IdCustomer
       try {
-        const response = await fetch(`/api/customers/${encodeURIComponent(clientId)}`);
+        //Editar endpoint correspondiente al  /api/Customers/{costumerId}
+        const response = await fetch(`https://localhost:7060/api/Customers/${encodeURIComponent(clientId)}`);
+        //-----------------------------------------------------------------------------------
         const data = await response.json();
         console.log('Datos obtenidos:', data);
         renderOrdersTable(data);
